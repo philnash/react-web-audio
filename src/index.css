@@ -26,7 +26,11 @@ main .controls {
   background: #333e5a;
   color: #fff;
 }
-
+main canvas {
+  padding: 20px;
+  margin: 0 auto;
+  display: block;
+}
 footer {
   background: #333e5a;
   color: #fff;

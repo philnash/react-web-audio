@@ -25,18 +25,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <main>
-          <div className="controls">
-            <button
-              onClick={
-                this.state.audio ? this.stopMicrophone : this.getMicrophone
-              }
-            >
-              {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
-            </button>
-          </div>
-          {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
-        </main>
+        <div className="controls">
+          <button
+            onClick={
+              this.state.audio ? this.stopMicrophone : this.getMicrophone
+            }
+          >
+            {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
+          </button>
+        </div>
+        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
       </div>
     );
   }
