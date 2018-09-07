@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AudioVisualiser from './AudioVisualiser';
 
 class AudioAnalyser extends Component {
   constructor(props) {
@@ -21,6 +22,10 @@ class AudioAnalyser extends Component {
     this.analyser.getByteTimeDomainData(this.dataArray);
     this.setState({ dataArray: this.dataArray });
     this.rafId = requestAnimationFrame(this.tick);
+  }
+
+  render() {
+    return <AudioVisualiser dataArray={this.state.dataArray} />;
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AudioAnalyser from './AudioAnalyser';
 
 class App extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends Component {
               {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
             </button>
           </div>
+          {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
         </main>
       </div>
     );
