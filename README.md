@@ -21,5 +21,3 @@ npm start
 ```
 
 And open the browser to [http://localhost:3000/](localhost:3000).
-
-You're ready to built the rest of the application now.
