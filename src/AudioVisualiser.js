@@ -6,19 +6,18 @@ class AudioVisualiser extends Component {
     this.canvas = React.createRef();
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     this.draw();
   }
 
   draw() {
     const { dataArray } = this.props;
-    const dataLength = dataArray.length;
     const canvas = this.canvas.current;
     const height = canvas.height;
     const width = canvas.width;
     const context = canvas.getContext('2d');
     let x = 0;
-    const sliceWidth = (width * 1.0) / dataLength;
+    const sliceWidth = (width * 1.0) / dataArray.length;
 
     context.lineWidth = 2;
     context.strokeStyle = '#000000';
@@ -26,8 +25,8 @@ class AudioVisualiser extends Component {
 
     context.beginPath();
     context.moveTo(0, height / 2);
-    for (let i = 0; i < dataLength; i++) {
-      const y = (dataArray[i] / 255.0) * height;
+    for (const item of dataArray) {
+      const y = (item / 255.0) * height;
       context.lineTo(x, y);
       x += sliceWidth;
     }
