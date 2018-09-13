@@ -4,7 +4,7 @@ import AudioVisualiser from './AudioVisualiser';
 class AudioAnalyser extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataArray: new Uint8Array(0) };
+    this.state = { audioData: new Uint8Array(0) };
     this.tick = this.tick.bind(this);
   }
 
@@ -20,12 +20,12 @@ class AudioAnalyser extends Component {
 
   tick() {
     this.analyser.getByteTimeDomainData(this.dataArray);
-    this.setState({ dataArray: this.dataArray });
+    this.setState({ audioData: this.dataArray });
     this.rafId = requestAnimationFrame(this.tick);
   }
 
   render() {
-    return <AudioVisualiser dataArray={this.state.dataArray} />;
+    return <AudioVisualiser audioData={this.state.audioData} />;
   }
 }
 
