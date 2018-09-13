@@ -4,7 +4,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div class="controls">
+        <div className="controls">
           <button>Get microphone input</button>
         </div>
       </div>
