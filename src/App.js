@@ -7,14 +7,15 @@ class App extends Component {
     this.state = {
       audio: null
     };
-    this.getMicrophone = this.getMicrophone.bind(this);
-    this.stopMicrophone = this.stopMicrophone.bind(this);
+    this.toggleMicrophone = this.toggleMicrophone.bind(this);
   }
 
-  getMicrophone() {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then(audio => this.setState({ audio }));
+  async getMicrophone() {
+    const audio = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: false
+    });
+    this.setState({ audio });
   }
 
   stopMicrophone() {
@@ -22,15 +23,19 @@ class App extends Component {
     this.setState({ audio: null });
   }
 
+  toggleMicrophone() {
+    if (this.state.audio) {
+      this.stopMicrophone();
+    } else {
+      this.getMicrophone();
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <div className="controls">
-          <button
-            onClick={
-              this.state.audio ? this.stopMicrophone : this.getMicrophone
-            }
-          >
+          <button onClick={this.toggleMicrophone}>
             {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
           </button>
         </div>

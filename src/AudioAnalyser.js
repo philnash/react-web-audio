@@ -4,7 +4,7 @@ import AudioVisualiser from './AudioVisualiser';
 class AudioAnalyser extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataArray: new Uint8Array() };
+    this.state = { dataArray: new Uint8Array(0) };
     this.tick = this.tick.bind(this);
   }
 
