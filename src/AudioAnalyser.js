@@ -24,6 +24,12 @@ class AudioAnalyser extends Component {
     this.rafId = requestAnimationFrame(this.tick);
   }
 
+  componentWillUnmount() {
+    cancelAnimationFrame(this.rafId);
+    this.analyser.disconnect();
+    this.source.disconnect();
+  }
+
   render() {
     return <AudioVisualiser audioData={this.state.audioData} />;
   }
