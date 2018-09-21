@@ -21,3 +21,7 @@ npm start
 ```
 
 And open the browser to [http://localhost:3000/](localhost:3000).
+
+## How to build it
+
+If you're interested in how to build a visualiser like this in React, check out the blog post: [Audio visualisation with the Web Audio API and React](https://www.twilio.com/blog/audio-visualisation-web-audio-api--react)
