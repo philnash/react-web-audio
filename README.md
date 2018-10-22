@@ -6,7 +6,9 @@ This is an example application that shows how to visualise audio from the microp
 
 ## How to build the app
 
-If you're interested in how to build a visualiser like this in React, check out the blog post: [Audio visualisation with the Web Audio API and React](https://www.twilio.com/blog/audio-visualisation-web-audio-api--react)
+If you're interested in how to build a visualiser like this in React, check out the blog post [Audio visualisation with the Web Audio API and React](https://www.twilio.com/blog/audio-visualisation-web-audio-api--react).
+
+For more on the canvas and React, check out the post [Techniques for animating on the canvas in React](https://philna.sh/blog/2018/09/27/techniques-for-animating-on-the-canvas-in-react/).
 
 ## How to run the app
 
