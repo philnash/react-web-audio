@@ -28,4 +28,4 @@ Start the application:
 npm start
 ```
 
-And open the browser to [http://localhost:3000/](localhost:3000).
+And open the browser to [http://localhost:3000/](http://localhost:3000).
