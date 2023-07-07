@@ -1,48 +1,40 @@
-import React, { Component } from 'react';
-import AudioAnalyser from './AudioAnalyser';
+import React, { useState } from "react";
+import AudioAnalyser from "./AudioAnalyser";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      audio: null
-    };
-    this.toggleMicrophone = this.toggleMicrophone.bind(this);
-  }
+function App() {
+  const [audio, setAudio] = useState(null);
 
-  async getMicrophone() {
+  const getMicrophone = async () => {
     const audio = await navigator.mediaDevices.getUserMedia({
       audio: true,
-      video: false
+      video: false,
     });
-    this.setState({ audio });
-  }
+    setAudio(audio);
+  };
 
-  stopMicrophone() {
-    this.state.audio.getTracks().forEach(track => track.stop());
-    this.setState({ audio: null });
-  }
+  const stopMicrophone = () => {
+    audio.getTracks().forEach((track) => track.stop());
+    setAudio(null);
+  };
 
-  toggleMicrophone() {
-    if (this.state.audio) {
-      this.stopMicrophone();
+  const toggleMicrophone = () => {
+    if (audio) {
+      stopMicrophone();
     } else {
-      this.getMicrophone();
+      getMicrophone();
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <div className="controls">
-          <button onClick={this.toggleMicrophone}>
-            {this.state.audio ? 'Stop microphone' : 'Get microphone input'}
-          </button>
-        </div>
-        {this.state.audio ? <AudioAnalyser audio={this.state.audio} /> : ''}
+  return (
+    <div className="App">
+      <div className="controls">
+        <button onClick={toggleMicrophone}>
+          {audio ? "Stop microphone" : "Get microphone input"}
+        </button>
       </div>
-    );
-  }
+      {audio ? <AudioAnalyser audio={audio} /> : ""}
+    </div>
+  );
 }
 
 export default App;
