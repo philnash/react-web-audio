@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
-import AudioVisualiser from './AudioVisualiser';
+import React, { useState, useEffect } from "react";
+import AudioVisualiser from "./AudioVisualiser";
 
-class AudioAnalyser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { audioData: new Uint8Array(0) };
-    this.tick = this.tick.bind(this);
-  }
+const AudioAnalyser = ({ audio }) => {
+  const [audioData, setAudioData] = useState(new Uint8Array(0));
 
-  componentDidMount() {
-    this.audioContext = new (window.AudioContext ||
-      window.webkitAudioContext)();
-    this.analyser = this.audioContext.createAnalyser();
-    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
-    this.source = this.audioContext.createMediaStreamSource(this.props.audio);
-    this.source.connect(this.analyser);
-    this.rafId = requestAnimationFrame(this.tick);
-  }
+  useEffect(() => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
+    // const dataArray = new Uint8Array(analyser.frequencyBinCount);
+    const source = audioContext.createMediaStreamSource(audio);
+    source.connect(analyser);
 
-  tick() {
-    this.analyser.getByteTimeDomainData(this.dataArray);
-    this.setState({ audioData: this.dataArray });
-    this.rafId = requestAnimationFrame(this.tick);
-  }
+    const tick = () => {
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteTimeDomainData(dataArray);
+      // setAudioData(new Uint8Array(dataArray));
+      setAudioData(dataArray);
+      rafId = requestAnimationFrame(tick);
+    };
 
-  componentWillUnmount() {
-    cancelAnimationFrame(this.rafId);
-    this.analyser.disconnect();
-    this.source.disconnect();
-  }
+    let rafId = requestAnimationFrame(tick);
 
-  render() {
-    return <AudioVisualiser audioData={this.state.audioData} />;
-  }
-}
+    return () => {
+      cancelAnimationFrame(rafId);
+      analyser.disconnect();
+      source.disconnect();
+    };
+  }, [audio]);
+
+  return <AudioVisualiser audioData={audioData} />;
+};
+
 
 export default AudioAnalyser;
